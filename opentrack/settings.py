@@ -25,7 +25,8 @@ SECRET_KEY = 'b4_l4h!rp4sr)wh+z#9%ol*9i63uq*e8w(b1t5_yzgbq$0i5ui'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# SECURITY WARNING: don't run with everything in production!
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -75,12 +76,12 @@ WSGI_APPLICATION = 'opentrack.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'my-app-db',
-        'USER': 'root',
-        'PASSWORD': 'password',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
         'HOST': 'db',
-        'PORT': 3306,
+        'PORT': 5432,
     }
 }
 
