@@ -3,3 +3,4 @@ psycopg2>=2.7,<3.0
 djangorestframework>=3.10.3
 django-rest-auth>=0.9.5
 django-allauth>=0.41.0
+django-cors-headers>=3.2.1
