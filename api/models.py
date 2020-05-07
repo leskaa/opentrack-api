@@ -3,17 +3,14 @@ from users.models import CustomUser
 
 
 class Profile(models.Model):
+    user_id = models.OneToOneField(
+        CustomUser, on_delete=models.CASCADE, primary_key=True)
     image_relative_path = models.CharField(max_length=128)
     location = models.CharField(max_length=64)
     website = models.URLField(blank=True, null=True)
     work = models.CharField(max_length=64)
     education = models.CharField(max_length=64)
     skills = models.CharField(max_length=256)
-    user_fk = models.ForeignKey(
-        CustomUser, on_delete=models.CASCADE, null=False)
-
-    def __str__(self):
-        return self.user_fk
 
 
 class Track(models.Model):
@@ -36,6 +33,8 @@ class Material(models.Model):
     website = models.URLField(null=False)
     track = models.ForeignKey(Track, on_delete=models.CASCADE, null=False)
     display_order = models.PositiveIntegerField()
+    author = models.ForeignKey(
+        CustomUser, on_delete=models.CASCADE, null=False)
 
     def __str__(self):
         return self.title
@@ -48,9 +47,6 @@ class TrackRating(models.Model):
         CustomUser, on_delete=models.CASCADE, null=False)
     track_fk = models.ForeignKey(Track, on_delete=models.CASCADE, null=False)
 
-    def __str__(self):
-        return str(self.rating) + " : " + self.track_fk + " : " + self.user_fk
-
 
 class MaterialRating(models.Model):
     material_rating_id = models.AutoField(primary_key=True)
@@ -60,18 +56,12 @@ class MaterialRating(models.Model):
     material_fk = models.ForeignKey(
         Material, on_delete=models.CASCADE, null=False)
 
-    def __str__(self):
-        return str(self.rating) + " : " + self.material_fk + " : " + self.user_fk
-
 
 class TrackFavorite(models.Model):
     track_favorite_id = models.AutoField(primary_key=True)
     user_fk = models.ForeignKey(
         CustomUser, on_delete=models.CASCADE, null=False)
     track_fk = models.ForeignKey(Track, on_delete=models.CASCADE, null=False)
-
-    def __str__(self):
-        return self.track_fk + " : " + self.user_fk
 
 
 class MaterialFavorite(models.Model):
@@ -80,6 +70,3 @@ class MaterialFavorite(models.Model):
         CustomUser, on_delete=models.CASCADE, null=False)
     material_fk = models.ForeignKey(
         Material, on_delete=models.CASCADE, null=False)
-
-    def __str__(self):
-        return self.material_fk + " : " + self.user_fk

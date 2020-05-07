@@ -5,8 +5,8 @@ from api.models import Profile, Track, Material, TrackRating, MaterialRating, Tr
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ('image_relative_path', 'location', 'website',
-                  'work', 'education', 'skills', 'user_fk')
+        fields = ('user_id', 'image_relative_path', 'location', 'website',
+                  'work', 'education', 'skills')
 
 
 class TrackSerializer(serializers.ModelSerializer):
@@ -20,7 +20,7 @@ class MaterialSerializer(serializers.ModelSerializer):
     class Meta:
         model = Material
         fields = ('material_id', 'title', 'description', 'views',
-                  'website', 'track', 'display_order')
+                  'website', 'track', 'display_order', 'author')
 
 
 class TrackRatingSerializer(serializers.ModelSerializer):
