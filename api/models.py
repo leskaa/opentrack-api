@@ -24,6 +24,9 @@ class Track(models.Model):
     class Meta:
         ordering = ['views']
 
+    def rating(self):
+        return self.ratings.aggregate(models.Avg('rating'))['rating__avg']
+
     def __str__(self):
         return self.title
 
@@ -52,7 +55,8 @@ class TrackRating(models.Model):
     rating = models.PositiveIntegerField()
     user_fk = models.ForeignKey(
         CustomUser, on_delete=models.CASCADE, null=False)
-    track_fk = models.ForeignKey(Track, on_delete=models.CASCADE, null=False)
+    track_fk = models.ForeignKey(
+        Track, related_name='ratings', on_delete=models.CASCADE, null=False)
 
 
 class MaterialRating(models.Model):

@@ -33,7 +33,7 @@ class GetTrackSerializer(serializers.ModelSerializer):
     class Meta:
         model = Track
         fields = ('track_id', 'title', 'description',
-                  'views', 'author', 'materials')
+                  'views', 'author', 'materials', 'rating')
 
 
 class TrackRatingSerializer(serializers.ModelSerializer):
