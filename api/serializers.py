@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from api.models import Profile, Track, Material, TrackRating, MaterialRating, TrackFavorite, MaterialFavorite
+from users.serializers import UserSerializer
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -9,18 +10,30 @@ class ProfileSerializer(serializers.ModelSerializer):
                   'work', 'education', 'skills')
 
 
-class TrackSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Track
-        fields = ('track_id', 'title', 'description',
-                  'views', 'author')
-
-
 class MaterialSerializer(serializers.ModelSerializer):
     class Meta:
         model = Material
         fields = ('material_id', 'title', 'description', 'views',
                   'website', 'track', 'display_order', 'author')
+
+
+class TrackSerializer(serializers.ModelSerializer):
+    materials = MaterialSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Track
+        fields = ('track_id', 'title', 'description',
+                  'views', 'author', 'materials')
+
+
+class GetTrackSerializer(serializers.ModelSerializer):
+    materials = MaterialSerializer(many=True, read_only=True)
+    author = UserSerializer(many=False, read_only=True)
+
+    class Meta:
+        model = Track
+        fields = ('track_id', 'title', 'description',
+                  'views', 'author', 'materials')
 
 
 class TrackRatingSerializer(serializers.ModelSerializer):

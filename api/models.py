@@ -19,7 +19,10 @@ class Track(models.Model):
     description = models.CharField(max_length=256)
     views = models.PositiveIntegerField()
     author = models.ForeignKey(
-        CustomUser, on_delete=models.CASCADE, null=False)
+        CustomUser, related_name='author', on_delete=models.CASCADE, null=False)
+
+    class Meta:
+        ordering = ['views']
 
     def __str__(self):
         return self.title
@@ -31,10 +34,14 @@ class Material(models.Model):
     description = models.CharField(max_length=32)
     views = models.PositiveIntegerField()
     website = models.URLField(null=False)
-    track = models.ForeignKey(Track, on_delete=models.CASCADE, null=False)
+    track = models.ForeignKey(
+        Track, related_name='materials', on_delete=models.CASCADE, null=False)
     display_order = models.PositiveIntegerField()
     author = models.ForeignKey(
         CustomUser, on_delete=models.CASCADE, null=False)
+
+    class Meta:
+        ordering = ['display_order']
 
     def __str__(self):
         return self.title

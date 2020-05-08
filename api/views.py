@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
 from api.models import Profile, Track, Material, TrackRating, MaterialRating, TrackFavorite, MaterialFavorite
-from api.serializers import ProfileSerializer, TrackSerializer, MaterialSerializer, TrackRatingSerializer, MaterialRatingSerializer, TrackFavoriteSerializer, MaterialFavoriteSerializer
+from api.serializers import GetTrackSerializer, MaterialFavoriteSerializer, MaterialRatingSerializer, MaterialSerializer, ProfileSerializer, TrackFavoriteSerializer, TrackRatingSerializer, TrackSerializer
 
 
 class ProfileView(viewsets.ModelViewSet):
@@ -11,7 +11,11 @@ class ProfileView(viewsets.ModelViewSet):
 
 class TrackView(viewsets.ModelViewSet):
     queryset = Track.objects.all()
-    serializer_class = TrackSerializer
+
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return GetTrackSerializer
+        return TrackSerializer
 
 
 class MaterialView(viewsets.ModelViewSet):
