@@ -26,8 +26,9 @@ SECRET_KEY = 'b4_l4h!rp4sr)wh+z#9%ol*9i63uq*e8w(b1t5_yzgbq$0i5ui'
 DEBUG = True
 
 # SECURITY WARNING: don't run with everything in production!
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['192.168.99.100', 'localhost', '127.0.0.1']
 
+CORS_ALLOW_CREDENTIALS = True
 
 # Application definition
 
