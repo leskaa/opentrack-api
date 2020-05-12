@@ -20,13 +20,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'b4_l4h!rp4sr)wh+z#9%ol*9i63uq*e8w(b1t5_yzgbq$0i5ui'
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 # SECURITY WARNING: don't run with everything in production!
-ALLOWED_HOSTS = ['192.168.99.100', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['https://opentrack-api.herokuapp.com/',
+                 'https://opentrack.netlify.app/']
 
 CORS_ALLOW_CREDENTIALS = True
 
