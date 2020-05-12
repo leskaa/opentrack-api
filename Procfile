@@ -1,2 +1,2 @@
-web: gunicorn gettingstarted.wsgi --log-file -
+web: gunicorn opentrack.wsgi --log-file -
 release: python manage.py migrate

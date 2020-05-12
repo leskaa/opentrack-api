@@ -26,8 +26,8 @@ SECRET_KEY = os.environ['SECRET_KEY']
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 # SECURITY WARNING: don't run with everything in production!
-ALLOWED_HOSTS = ['https://opentrack-api.herokuapp.com/',
-                 'https://opentrack.netlify.app/']
+ALLOWED_HOSTS = ['opentrack-api.herokuapp.com',
+                 'opentrack.netlify.app']
 
 CORS_ALLOW_CREDENTIALS = True
 
@@ -69,7 +69,8 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_WHITELIST = [
-    'http://localhost:4200'
+    'https://opentrack-api.herokuapp.com',
+    'https://opentrack-tech.netlify.app'
 ]
 
 ROOT_URLCONF = 'opentrack.urls'
