@@ -17,6 +17,12 @@ class TrackView(viewsets.ModelViewSet):
             return GetTrackSerializer
         return TrackSerializer
 
+    def retrieve(self, request, *args, **kwargs):
+        obj = self.get_object()
+        obj.views = obj.views + 1
+        obj.save(update_fields=("views", ))
+        return super().retrieve(request, *args, **kwargs)
+
 
 class MaterialView(viewsets.ModelViewSet):
     queryset = Material.objects.all()

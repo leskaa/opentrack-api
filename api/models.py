@@ -6,17 +6,17 @@ class Profile(models.Model):
     user_id = models.OneToOneField(
         CustomUser, on_delete=models.CASCADE, primary_key=True)
     image_relative_path = models.CharField(max_length=128)
-    location = models.CharField(max_length=64)
+    location = models.CharField(max_length=128)
     website = models.URLField(blank=True, null=True)
-    work = models.CharField(max_length=64)
-    education = models.CharField(max_length=64)
+    work = models.CharField(max_length=128)
+    education = models.CharField(max_length=128)
     skills = models.CharField(max_length=256)
 
 
 class Track(models.Model):
     track_id = models.AutoField(primary_key=True)
-    title = models.CharField(max_length=32)
-    description = models.CharField(max_length=256)
+    title = models.CharField(max_length=128)
+    description = models.CharField(max_length=512)
     views = models.PositiveIntegerField()
     author = models.ForeignKey(
         CustomUser, related_name='author', on_delete=models.CASCADE, null=False)
@@ -33,8 +33,8 @@ class Track(models.Model):
 
 class Material(models.Model):
     material_id = models.AutoField(primary_key=True)
-    title = models.CharField(max_length=32)
-    description = models.CharField(max_length=32)
+    title = models.CharField(max_length=128)
+    description = models.CharField(max_length=512)
     views = models.PositiveIntegerField()
     website = models.URLField(null=False)
     track = models.ForeignKey(
